@@ -8,6 +8,7 @@ import images from '../../constants/images/index';
 import _ from 'lodash';
 import useStyles from './styles';
 import clsx from 'clsx';
+import optionsData from './dummy.js';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
@@ -126,7 +127,7 @@ const Dropdown = () => {
                 }}
               >
                 <img
-                  src={images.one}
+                  src={option.images}
                   style={{
                     height: 24,
                     width: 24,
@@ -190,7 +191,15 @@ const Dropdown = () => {
             marginLeft: 25,
           }}
         >
-          {val.length > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'row',
+              // position: 'relative',
+            }}
+          >
             <div
               style={{
                 display: 'flex',
@@ -202,11 +211,28 @@ const Dropdown = () => {
                 borderRadius: 50,
                 color: 'white',
                 fontSize: 13,
+                // marginRight: -15,
+                zIndex: 2,
               }}
             >
-              {val.length}
+              {val.length > 0 ? val.length : optionsData.length}
             </div>
-          )}
+            {/* {_.times(3, (i) => (
+                <img
+                  key={i}
+                  src={images.one}
+                  style={{
+                    height: 24,
+                    width: 24,
+                    marginLeft: -15,
+                    borderRadius: 50,
+                    border: '3px solid white',
+                    // position: 'absolute',
+                  }}
+                />
+              ))} */}
+          </div>
+
           <span style={{ color: '#7E98BA', marginLeft: 8, fontSize: 13 }}>
             {val.length > 0
               ? _.times(val.length > 2 ? 2 : val.length, (i) => {
@@ -215,6 +241,7 @@ const Dropdown = () => {
               : 'Select Employees'}
           </span>
         </div>
+
         <img
           style={{ marginRight: 25 }}
           src={isOpen ? images.arrowDown : images.arrowUp}
@@ -253,55 +280,4 @@ const Dropdown = () => {
     </>
   );
 };
-
-const optionsData = [
-  // {
-  //   title: 'All',
-  //   year: 1994,
-  //   type: 'All',
-  // },
-  {
-    title: 'Un grouped',
-    year: 1994,
-  },
-  {
-    title: 'The Shawshank Redemption',
-    year: 1994,
-    images: images.one,
-    position: 'All practitioners',
-  },
-  {
-    title: 'The Godfather',
-    year: 1972,
-    images: images.one,
-    position: 'All practitioners',
-  },
-  {
-    title: 'The Godfather: Part II',
-    year: 1974,
-    images: images.one,
-    position: 'All practitioners',
-  },
-  {
-    title: 'The Dark Knight',
-    year: 2008,
-    images: images.one,
-    position: 'All practitioners',
-  },
-
-  { title: '12 Angry Men', year: 1957, position: 'All assistants' },
-  { title: "Schindler's List", year: 1993, position: 'All assistants' },
-  { title: 'Pulp Fiction', year: 1994, position: 'All assistants' },
-  {
-    title: 'The Lord of the Rings: The Return of the King',
-    year: 2003,
-    position: 'All assistants',
-  },
-  {
-    title: 'The Good, the Bad and the Ugly',
-    year: 1966,
-    position: 'All assistants',
-  },
-];
-
 export default Dropdown;
