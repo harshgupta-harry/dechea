@@ -6,50 +6,8 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import images from '../../constants/images/index';
 import _ from 'lodash';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  '@global': {
-    '*::-webkit-scrollbar': {
-      width: '0.3em',
-      height: '6.3em',
-    },
-    '*::-webkit-scrollbar-track': {
-      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)',
-    },
-    '*::-webkit-scrollbar-thumb': {
-      backgroundColor: '#556E9A',
-      // outline: '1px solid slategrey',
-    },
-  },
-  root: {
-    backgroundColor: '#142A51',
-    borderTopRightRadius: 12,
-    borderTopLeftRadius: 12,
-  },
-  paper: {
-    marginTop: 0,
-    backgroundColor: '#142A51',
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
-  },
-  inputRoot: {
-    backgroundColor: '#1C3663',
-    borderTopRightRadius: 12,
-    borderTopLeftRadius: 12,
-    fontSize: 13,
-    color: '#6F8BBC',
-    // '& .MuiOutlinedInput-notchedOutline': {
-    //   borderColor: 'green',
-    // },
-    // '&:hover .MuiOutlinedInput-notchedOutline': {
-    //   borderColor: 'red',
-    // },
-    // '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    //   borderColor: 'purple',
-    // },
-  },
-}));
+import useStyles from './styles';
+import clsx from 'clsx';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
@@ -80,8 +38,10 @@ const Dropdown = () => {
         <span style={{ fontSize: 13, color: '#A0B5D9' }}>All</span>
 
         <Checkbox
-          icon={icon}
-          checkedIcon={checkedIcon}
+          checkedIcon={
+            <span className={clsx(classes.icon, classes.checkedIcon)} />
+          }
+          icon={<span className={classes.icon} />}
           checked={allOptionsSelected ? true : false}
           onChange={() => {
             if (allOptionsSelected) {
@@ -127,8 +87,10 @@ const Dropdown = () => {
           <span style={{ fontSize: 13, color: '#A0B5D9' }}>{group}</span>
           {group && (
             <Checkbox
-              icon={icon}
-              checkedIcon={checkedIcon}
+              checkedIcon={
+                <span className={clsx(classes.icon, classes.checkedIcon)} />
+              }
+              icon={<span className={classes.icon} />}
               checked={allOptionsSelected ? true : false}
               onChange={() => {
                 if (allOptionsSelected) {
@@ -178,8 +140,13 @@ const Dropdown = () => {
                 </span>
               </div>
               <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
+                // icon={icon}
+                // checkedIcon={checkedIcon}
+                checkedIcon={
+                  <span className={clsx(classes.icon, classes.checkedIcon)} />
+                }
+                icon={<span className={classes.icon} />}
+                disableRipple
                 checked={optionIndex === -1 ? false : true}
                 onChange={(e) => {
                   if (optionIndex === -1) {
@@ -214,9 +181,40 @@ const Dropdown = () => {
           borderRadius: 16,
         }}
       >
-        <span style={{ color: '#7E98BA', marginLeft: 25, fontSize: 13 }}>
-          Select Employees
-        </span>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            marginLeft: 25,
+          }}
+        >
+          {val.length > 0 && (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 24,
+                width: 24,
+                backgroundColor: '#142A51',
+                borderRadius: 50,
+                color: 'white',
+                fontSize: 13,
+              }}
+            >
+              {val.length}
+            </div>
+          )}
+          <span style={{ color: '#7E98BA', marginLeft: 8, fontSize: 13 }}>
+            {val.length > 0
+              ? _.times(val.length > 2 ? 2 : val.length, (i) => {
+                  return i > 0 ? `, ${val[i]?.title}` : val[i]?.title;
+                })
+              : 'Select Employees'}
+          </span>
+        </div>
         <img
           style={{ marginRight: 25 }}
           src={isOpen ? images.arrowDown : images.arrowUp}
