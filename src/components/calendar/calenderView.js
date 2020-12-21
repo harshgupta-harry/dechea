@@ -40,7 +40,6 @@ function CalenderView() {
         width={Math.min(window.innerWidth, 362)}
         height={window.innerHeight - 200}
         rowHeight={50}
-        minDate={lastWeek}
         displayOptions={{
           showOverlay: false,
           shouldHeaderAnimate: false,
