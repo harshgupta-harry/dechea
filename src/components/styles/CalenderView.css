@@ -21,10 +21,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 35px;
-  height: 35px;
-  margin-top: -18px;
-  margin-left: -18px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: -20px;
   border-radius: 30%;
   background-color: #346bd1;
   z-index: -1;
@@ -54,10 +54,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 35px;
-  height: 35px;
-  margin-top: -18px;
-  margin-left: -18px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: -20px;
   border-radius: 30%;
   box-shadow: inset 0 0 0 1px;
   z-index: -1;
@@ -80,10 +80,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 35px;
-  height: 35px;
-  margin-top: -18px;
-  margin-left: -18px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: -20px;
   border-radius: 30%;
   line-height: 56px;
   z-index: 2;
@@ -400,8 +400,14 @@
   flex-grow: 1;
   font-weight: 500;
   text-align: center;
+  display: block;
+  visibility: hidden;
 }
-.Cal__Years__root {
+
+.Cal__Weekdays__day:first-letter {
+  visibility: visible;
+}
+​ .Cal__Years__root {
   position: absolute;
   left: 0;
   right: 0;
@@ -654,13 +660,13 @@
 }
 .Cal__Month__row:first-child li {
   background-color: rgb(20, 42, 81, 1);
-  box-shadow: 0 -1px 0 #e9e9e9;
+  box-shadow: 0 -1px 0 #25406d;
 }
 .Cal__Month__row:nth-child(2) {
-  box-shadow: 0 -1px 0 #e9e9e9;
+  box-shadow: 0 -1px 0 #25406d;
 }
 .Cal__Month__row.Cal__Month__partial:first-child li:first-child {
-  box-shadow: 0px -1px 0 #e9e9e9, inset 1px 0 0 #e9e9e9;
+  box-shadow: 0px -1px 0 #25406d, inset 1px 0 0 #25406d;
 }
 .Cal__Month__row.Cal__Month__partial:last-of-type li {
   position: relative;
@@ -704,10 +710,36 @@
 }
 .datepicker {
   width: 361px;
-  height: 20px;
-  background-color: rgb(240, 245, 251);
+  height: 30px;
   display: flex;
   align-items: center;
   flex-direction: row;
-  border-radius: 16px;
+  border: lightgrey;
+  background-image: url(https://i.imgur.com/u6upaAs.png);
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  background-position: 1% center;
+}
+input.datepicker {
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+input.datepicker {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA3klEQVRIS+3VMU9CMRTF8d8zBL+aizoQFhx0kUk33RzdYMNFXUFnYeGrYYyaJiUxJHDLSxodbNKpfeffc9/pbaPyaCrr+3OA++z4rtT5Pg5GuMnCY9yWQEoBE1xhlUUP8YDrCBIB0vojLvGO0yz4hm4JJAKcYYoPHGOZAUdYoIMBXrc5iQAHeMlzviFygj7O8dkWEJU4XI8chALRhn9AVKHf70VRTHu4wFfbmKZLNKt50dLBnna0imcMd/2I0phWa3Y/D1e1Xa9BCZJG0VuQNpaWKMx72xS1Fl5/WN3BN+AgJhnZQlq4AAAAAElFTkSuQmCC");
+  background-position: calc(100% - 0.5rem), 100% 0;
+  background-size: 1.5em 1.5em;
+  background-repeat: no-repeat;
+}
+
+input.datepicker:focus {
+  border-color: blue;
+  outline: 0;
 }

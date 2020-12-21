@@ -20,26 +20,32 @@ function CalenderView() {
 
   return (
     <div className="row mt-5">
-      <div>
-        <input
-          type="text"
-          value={date}
-          className="datepicker"
-          placeholder="Pick date"
-          onChange={handleDateChange}
-        />
+      <div class="form-group">
+        <div class="input-group date" id="timepicker">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>{" "}
+          </span>
+          <input
+            type="text"
+            value={date}
+            className="datepicker form-control"
+            placeholder="Pick date"
+            onChange={handleDateChange}
+          />
+        </div>
       </div>
+      <div></div>
       <InfiniteCalendar
         selected={null}
-        width={Math.min(window.innerWidth, 262)}
-        height={window.innerHeight - 250}
+        width={Math.min(window.innerWidth, 362)}
+        height={window.innerHeight - 200}
         rowHeight={50}
-        disabledDays={[0, 6]}
         minDate={lastWeek}
         displayOptions={{
           showOverlay: false,
           shouldHeaderAnimate: false,
           showHeader: false,
+          showTodayHelper: false,
         }}
         onSelect={handleDateChange}
         theme={{
