@@ -2,7 +2,7 @@ import React from "react";
 import InfiniteCalendar from "react-infinite-calendar";
 import "react-infinite-calendar/styles.css"; // Make sure to import the default stylesheet
 import format from "date-fns/format";
-import "./CalenderView.css";
+import "../styles/CalenderView.css";
 
 function CalenderView() {
   // Render the Calendar
@@ -14,21 +14,25 @@ function CalenderView() {
   );
   const [date, setDate] = React.useState("");
   const handleDateChange = (date) => {
-    setDate(date);
+    setDate(format(date, "yyyy-MM-dd"));
+    console.log(format(date, "yyyy-MM-dd"));
   };
 
   return (
-    <div>
+    <div className="row mt-5">
       <div>
-        <input type="text" value="{date}" onChange={handleDateChange} />
-        <button className="example-custom-input" onClick={handleDateChange}>
-          {date} Click me
-        </button>
+        <input
+          type="text"
+          value={date}
+          className="datepicker"
+          placeholder="Pick date"
+          onChange={handleDateChange}
+        />
       </div>
       <InfiniteCalendar
         selected={null}
-        width={Math.min(window.innerWidth, 300)}
-        height={400}
+        width={Math.min(window.innerWidth, 262)}
+        height={window.innerHeight - 250}
         rowHeight={50}
         disabledDays={[0, 6]}
         minDate={lastWeek}
@@ -37,9 +41,7 @@ function CalenderView() {
           shouldHeaderAnimate: false,
           showHeader: false,
         }}
-        onSelect={function (date) {
-          alert("You selected: " + format(date, "yyyy-MM-dd"));
-        }}
+        onSelect={handleDateChange}
         theme={{
           weekdayColor: "#142A51",
           headerColor: "#142A51",
