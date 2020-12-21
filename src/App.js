@@ -1,12 +1,10 @@
-import React from "react";
-import CalenderView from "./components/calendar/calenderView";
-import Dropdown from "./components/dropdown/index";
+import React from 'react';
+import CalenderView from './components/calendar/calenderView';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className='App'>
       App
-      <Dropdown />
       <CalenderView />
     </div>
   );
