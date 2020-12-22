@@ -1,24 +1,14 @@
 import React from 'react';
-import CalenderView from './components/calendar/calenderView';
-import Dropdown from './components/dropdown/index';
-
+import View from './components/View';
+import { Route, Switch, HashRouter, BrowserRouter } from 'react-router-dom';
 const App = () => {
   return (
-    <div
-      className='App'
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingLeft: 100,
-        paddingRight: 100,
-      }}
-    >
-      <div>
-        <Dropdown />
-      </div>
-      <CalenderView />
-    </div>
+    <BrowserRouter basename='/mopwnaplus/dechea/'>
+      <Switch>
+        <Route exact path='/' component={View} />
+        {/* <View /> */}
+      </Switch>
+    </BrowserRouter>
   );
 };
 
