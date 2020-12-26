@@ -10,8 +10,8 @@ const View = () => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: 100,
-        paddingRight: 100,
+        paddingLeft: 200,
+        paddingRight: 200,
       }}
     >
       <div>

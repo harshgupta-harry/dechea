@@ -1,0 +1,15 @@
+.wrapper input[type='text'] {
+  position: relative;
+}
+
+input {
+  font-family: 'FontAwesome';
+} /* This is for the placeholder */
+
+.wrapper:before {
+  font-family: 'FontAwesome';
+  color: red;
+  position: relative;
+  left: -5px;
+  content: '\f007';
+}

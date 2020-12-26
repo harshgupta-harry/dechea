@@ -2,8 +2,12 @@ import images from '../../constants/images/index';
 
 const optionsData = [
   {
+    title: 'All employee',
+    position: 'All employee',
+  },
+  {
     title: 'Dr. Siegfried Tausend',
-    images: images.one,
+    images: images.four,
   },
   {
     title: 'Dr. Siegfried Tausend',
@@ -12,12 +16,12 @@ const optionsData = [
   },
   {
     title: 'Dr. Xavier III',
-    images: images.two,
+    images: images.four,
     position: 'All practitioners',
   },
   {
     title: 'Dr. Don Health',
-    images: images.one,
+    images: images.two,
     position: 'All practitioners',
   },
 
@@ -30,7 +34,7 @@ const optionsData = [
   { title: 'Dr. Xavier III', images: images.one, position: 'All assistants' },
   {
     title: 'Dr. Siegfried Tausend',
-    images: images.one,
+    images: images.four,
     position: 'All assistants',
   },
   { title: 'Dr. Xavier III', images: images.one, position: 'All assistants' },

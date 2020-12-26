@@ -9,6 +9,10 @@ import _ from 'lodash';
 import useStyles from './styles';
 import clsx from 'clsx';
 import optionsData from './dummy.js';
+import RenderGroup from './render-group.js';
+import { renderHeading } from './utils.js';
+import 'font-awesome/css/font-awesome.min.css';
+import './styles.css';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize='small' />;
 const checkedIcon = <CheckBoxIcon fontSize='small' />;
@@ -18,155 +22,6 @@ const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [val, setVal] = useState([]);
 
-  // renderDropdownBase = () => {
-  //   if(_.difference(val, optionsData).length === 0){
-  //     return (<div>All</div>)
-  //   }
-  //   if()
-  // }
-  const renderAll = () => {
-    const allOptionsSelected = _.difference(val, optionsData).length === 0;
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingLeft: 20,
-          paddingRight: 16,
-        }}
-      >
-        <span style={{ fontSize: 13, color: '#A0B5D9' }}>All</span>
-
-        <Checkbox
-          checkedIcon={
-            <span className={clsx(classes.icon, classes.checkedIcon)} />
-          }
-          icon={<span className={classes.icon} />}
-          checked={allOptionsSelected ? true : false}
-          onChange={() => {
-            if (allOptionsSelected) {
-              setVal([]);
-            } else {
-              setVal([...optionsData]);
-            }
-          }}
-        />
-      </div>
-    );
-  };
-  const renderGroup = ({ group, children, id }) => {
-    let options = optionsData.filter((item, i) => {
-      return item.position === group;
-    });
-    const allOptionsSelected = _.difference(options, val).length === 0;
-    console.log(
-      val,
-      'val',
-      options,
-      'options',
-      allOptionsSelected,
-      'dvfvfdvdfv'
-    );
-    return (
-      <div
-        style={{
-          borderBottom: '1px solid #25406D',
-          // backgroundColor: '#142A51',
-        }}
-      >
-        {/* {options.type === 'All' ? renderAll() : null} */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingLeft: 20,
-            paddingRight: 16,
-          }}
-        >
-          <span style={{ fontSize: 13, color: '#A0B5D9' }}>{group}</span>
-          {group && (
-            <Checkbox
-              checkedIcon={
-                <span className={clsx(classes.icon, classes.checkedIcon)} />
-              }
-              icon={<span className={classes.icon} />}
-              checked={allOptionsSelected ? true : false}
-              onChange={() => {
-                if (allOptionsSelected) {
-                  let array = val.filter(function (el) {
-                    return !options.includes(el);
-                  });
-                  setVal([...array]);
-                } else {
-                  setVal([...val, ...options]);
-                }
-              }}
-            />
-          )}
-        </div>
-        {options.map((option, index) => {
-          let optionIndex = val.indexOf(option);
-          return (
-            <div
-              key={index}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingLeft: 20,
-                paddingRight: 16,
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}
-              >
-                <img
-                  src={option.images}
-                  style={{
-                    height: 24,
-                    width: 24,
-                    borderRadius: 50,
-                    marginRight: 16,
-                    zIndex: 1000,
-                  }}
-                />
-                <span style={{ fontSize: 13, color: '#DAE2EF' }}>
-                  {option.title}
-                </span>
-              </div>
-              <Checkbox
-                // icon={icon}
-                // checkedIcon={checkedIcon}
-                checkedIcon={
-                  <span className={clsx(classes.icon, classes.checkedIcon)} />
-                }
-                icon={<span className={classes.icon} />}
-                disableRipple
-                checked={optionIndex === -1 ? false : true}
-                onChange={(e) => {
-                  if (optionIndex === -1) {
-                    setVal([...val, option]);
-                  } else {
-                    var array = [...val]; // make a separate copy of the array
-                    array.splice(optionIndex, 1);
-                    setVal(array);
-                  }
-
-                  console.log(val, 'cdcnjksc');
-                }}
-              />
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
   return (
     <>
       <div
@@ -174,7 +29,9 @@ const Dropdown = () => {
         style={{
           width: 376,
           height: 53,
-          backgroundColor: '#F0F5FB',
+
+          backgroundColor: isOpen ? '#FFFFFF' : '#F0F5FB',
+          border: isOpen ? '1px solid #EBF0F6' : '1px solid #F0F5FB',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -213,32 +70,37 @@ const Dropdown = () => {
                 fontSize: 13,
                 // marginRight: -15,
                 zIndex: 2,
+                border: '3px solid white',
               }}
             >
               {val.length > 0 ? val.length : optionsData.length}
             </div>
-            {/* {_.times(3, (i) => (
+            {_.times(val.length > 2 ? 2 : val.length, (i) => {
+              return (
                 <img
-                  key={i}
-                  src={images.one}
+                  src={val[i]?.images}
                   style={{
+                    marginLeft: -20,
                     height: 24,
                     width: 24,
-                    marginLeft: -15,
-                    borderRadius: 50,
                     border: '3px solid white',
-                    // position: 'absolute',
+                    borderRadius: '50%',
+                    zIndex: 1 - i,
+                    // objectFit: 'contain',
                   }}
                 />
-              ))} */}
+              );
+            })}
           </div>
 
-          <span style={{ color: '#7E98BA', marginLeft: 8, fontSize: 13 }}>
-            {val.length > 0
-              ? _.times(val.length > 2 ? 2 : val.length, (i) => {
-                  return i > 0 ? `, ${val[i]?.title}` : val[i]?.title;
-                })
-              : 'Select Employees'}
+          <span
+            style={{
+              color: isOpen ? '#314363' : '#7E98BA',
+              marginLeft: 8,
+              fontSize: 13,
+            }}
+          >
+            {renderHeading(val, optionsData)}
           </span>
         </div>
 
@@ -258,25 +120,40 @@ const Dropdown = () => {
           id='checkboxes-tags-demo'
           options={optionsData}
           disableCloseOnSelect
+          noOptionsText='Not found'
           getOptionLabel={(option) => option.title}
           groupBy={(option) => option.position}
-          renderGroup={(group) => {
-            return renderGroup(group);
+          renderGroup={(group, i) => {
+            return (
+              <RenderGroup
+                groupObject={group}
+                val={val}
+                setVal={setVal}
+                classes={classes}
+                index={i}
+              />
+            );
           }}
           style={{ width: 376, overflow: 'none' }}
           onChange={(e) => console.log(e, 'scfvfvsc')}
           openOnFocus
           renderInput={(params) => (
-            <TextField
-              {...params}
-              variant='outlined'
-              // label='Checkboxes'
-              placeholder='Search employee...'
-              // style={{ backgroundColor: '#1C3663', borderRadius: 10 }}
-            />
+            <div>
+              <TextField
+                {...params}
+                variant='outlined'
+                // className='wrapper'
+                // label='Checkboxes'
+                placeholder='Search employee...'
+                // style={{ backgroundColor: '#1C3663', borderRadius: 10 }}
+              />
+            </div>
           )}
         />
       )}
+      {/* <div className='wrapper'>
+        <input type='text' placeholder='&#xF007; Username' />
+      </div> */}
     </>
   );
 };
